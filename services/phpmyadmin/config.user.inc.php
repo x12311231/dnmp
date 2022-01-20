@@ -17,3 +17,8 @@ $cfg['Servers'][$i]['verbose']   = 'no2';
 $cfg['Servers'][$i]['host']      = 'mysql5';
 */
 
+$i = 0;
+
+$i++; // server 1 :
+$cfg['Servers'][$i]['verbose']   = 'no1';
+$cfg['Servers'][$i]['host']      = 'rds5f3gzemdw53bpsnowl.mysql.rds.aliyuncs.com';

@@ -639,8 +639,13 @@ if [[ -z "${EXTENSIONS##*,xhprof,*}" ]]; then
         && tar -xf xhprof-2.2.0.tgz -C xhprof --strip-components=1 \
         && ( cd xhprof/extension/ && phpize && ./configure  && make ${MC} && make install ) \
         && docker-php-ext-enable xhprof
-    else
-       echo "---------- PHP Version>= 7.0----------"
+    else 
+        #echo "---------- PHP Version>= 7.0----------"
+        mkdir xhprof \
+        && tar -xf xhprof-0.9.4.tgz -C xhprof --strip-components=1 \
+        && ( cd xhprof/extension/ && phpize && ./configure  && make ${MC} && make install ) \
+        && docker-php-ext-enable xhprof
+
     fi
 
 fi
