@@ -1,6 +1,17 @@
 ##有些配置是针对vanke,vanke-gateway项目的
   如nginx的部分配置文件，以帮助更换电脑或笔记本或系统崩溃重装时可以快速搭建开发环境
 
+  $ sudo docker-compose up -d
+
+  $ cd path/dnmp/www
+  $ git clone git@~~/vanke.git
+  $ git clone git@~~/vanke-gateway.git
+  $ cp path/bussinies.ini dnmp/www/vanke/config/bussinies.ini
+  $ cp path/bussinies.ini dnmp/www/vanke-gateway/config/bussinies.ini
+
+  $ sudo docker-compose exec -w /www/vanke php composer update
+  $ sudo docker-compose exec -w /www/vanke-gateway php composer update
+
 DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的**LNMP一键安装程序**。
 
 > 使用前最好提前阅读一遍[目录](#目录)，以便快速上手，遇到问题也能及时排除。交流QQ一群：**572041090（已满）**，二群：**300723526**。

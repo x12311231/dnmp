@@ -2,3 +2,5 @@
 !.gitignore
 !certs/localhost/
 !localhost.conf
+!vanke.conf
+!vanke-gateway.conf
