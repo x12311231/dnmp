@@ -1,4 +1,5 @@
 ##有些配置是针对vanke,vanke-gateway项目的
+```
   如nginx的部分配置文件，以帮助更换电脑或笔记本或系统崩溃重装时可以快速搭建开发环境
 
   $ sudo docker-compose up -d
@@ -11,6 +12,7 @@
 
   $ sudo docker-compose exec -w /www/vanke php composer update
   $ sudo docker-compose exec -w /www/vanke-gateway php composer update
+```
 
 DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的**LNMP一键安装程序**。
 
