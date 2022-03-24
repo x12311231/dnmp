@@ -1,0 +1,23 @@
+# project root to exec `source bash.source`
+project_dir=`pwd`
+#alias listenLogVG='tail -f ${project_dir}/www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/*'
+#alias listenLogV='tail -f ${project_dir}/www/vanke/apps/web/logs/`date +%Y%m%d`/*'
+#alias listenLogE='tail -f ${project_dir}/logs/php/php.error.log'
+listenLogVG=${project_dir}/www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/web.log
+listenLogV=${project_dir}/www/vanke/apps/web/logs/`date +%Y%m%d`/web.log
+listenLogE=${project_dir}/logs/php/php.error.log
+
+listenLog() {
+    nohup /bin/bash tools/listenLogV1.sh $1 &
+}
+
+alias listenLogVG1='listenLog ${listenLogVG} && tail -f ${project_dir}/www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/*'
+alias listenLogV1='listenLog ${listenLogV} && tail -f ${project_dir}/www/vanke/apps/web/logs/`date +%Y%m%d`/*'
+alias listenLogE1='listenLog ${listenLogE} && tail -f ${project_dir}/logs/php/php.error.log'
+#cd ${listenLogV}
+#alias listenLogVG=echo ls ${listenLogVG}|awk '{print i$0}' i=`pwd`'/'
+#alias listenLogV1=echo ls ${listenLogV}|awk '{print i$0}' i=`pwd`'/'
+#alias listenLogE='tail -f ${project_dir}/logs/php/php.error.log'
+#
+#cd ${project_dir}
+#ls ${listenLogV}|awk '{print i$0}' i=`pwd`'/'
