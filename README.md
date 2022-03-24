@@ -14,9 +14,9 @@
   $ sudo docker-compose exec -w /www/vanke-gateway php composer update
   
   $ source base.source
-  $listenLogV1
-  $listenLogVG1
-  $listenLogE1
+  $ listenLogV1
+  $ listenLogVG1
+  $ listenLogE1
   
 ```
 
