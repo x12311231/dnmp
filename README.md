@@ -13,11 +13,16 @@
   $ sudo docker-compose exec -w /www/vanke php composer update
   $ sudo docker-compose exec -w /www/vanke-gateway php composer update
   
+  #ubuntu21下执行
   $ source base.source
   $ listenLogV1
   $ listenLogVG1
   $ listenLogE1
   
+  #docker日志监听(macOS下)
+  $ docker-compose up LogE
+  $ docker-compose up LogV
+  $ docker-compose up LogVG
 ```
 
 DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的**LNMP一键安装程序**。
