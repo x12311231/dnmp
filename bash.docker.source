@@ -1,7 +1,4 @@
 # project root to exec `source bash.source`
-#alias listenLogVG='tail -f /www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/*'
-#alias listenLogV='tail -f /www/vanke/apps/web/logs/`date +%Y%m%d`/*'
-#alias listenLogE='tail -f /logs/php/php.error.log'
 listenLogVG=/www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/web.log
 listenLogV=/www/vanke/apps/web/logs/`date +%Y%m%d`/web.log
 listenLogE=/logs/php/php.error.log

@@ -131,6 +131,24 @@ services:
         source /bash.docker.source 
     networks:
       - default
+  log:
+    image: ubuntu 
+    volumes:
+      - ${SOURCE_DIR}:/www/:rw
+      - ./bash.docker1.source:/bash.docker1.source
+      - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
+      - ./tools/test.sh:/test.sh
+      - ./logs/:/logs/
+    environment:
+      EXEC: listen
+      TZ: "$TZ"
+    command:
+      - /bin/bash
+      - -c
+      - |
+        source /bash.docker1.source 
+    networks:
+      - default
   #  php80:
   #    build:
   #      context: ./services/php80
