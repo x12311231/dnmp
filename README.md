@@ -23,6 +23,8 @@
   $ docker-compose up LogE
   $ docker-compose up LogV
   $ docker-compose up LogVG
+  #docker监听所有日志(添加监听日志文件：编辑bash.docker1.source,添加文件路径到files数组)
+  $ docker-compose up log
 ```
 
 DNMP（Docker + Nginx + MySQL + PHP7/5 + Redis）是一款全功能的**LNMP一键安装程序**。
