@@ -1,7 +1,8 @@
 ##有些配置是针对vanke,vanke-gateway项目的
 ```
   如nginx的部分配置文件，以帮助更换电脑或笔记本或系统崩溃重装时可以快速搭建开发环境
-
+  添加vanke.local vanke-gateway.local到/etc/hosts
+  
   $ sudo docker-compose up -d
 
   $ cd path/dnmp/www
