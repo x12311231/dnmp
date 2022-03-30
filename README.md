@@ -13,17 +13,11 @@
   $ sudo docker-compose exec -w /www/vanke php composer update
   $ sudo docker-compose exec -w /www/vanke-gateway php composer update
   
-  #ubuntu21下执行
-  $ source base.source
-  $ listenLogV1
-  $ listenLogVG1
-  $ listenLogE1
-  
-  #docker日志监听(macOS下)
+  #日志监听
   $ docker-compose up LogE
   $ docker-compose up LogV
   $ docker-compose up LogVG
-  #docker监听所有日志(添加监听日志文件：编辑bash.docker1.source,添加文件路径到files数组)
+  #监听所有日志(添加监听日志文件：编辑bash.docker1.source,添加文件路径到files数组)
   $ docker-compose up log
 ```
 
