@@ -1,0 +1,20 @@
+# project root to exec `source bash.source`
+listenLogVG=/www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/web.log
+listenLogV=/www/vanke/apps/web/logs/`date +%Y%m%d`/web.log
+listenLogE=/logs/php/php.error.log
+
+listenLog() {
+    nohup /bin/bash tools/listenLogV1.sh $1 &
+}
+
+listenLogV() {
+    listenLog ${listenLogV} && tail -f /www/vanke/apps/web/logs/`date +%Y%m%d`/*
+}
+listenLogVG() {
+    listenLog ${listenLogVG} && tail -f /www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/*
+}
+listenLogE() {
+    listenLog ${listenLogE} && tail -f /logs/php/php.error.log
+}
+
+${EXEC}

@@ -1,0 +1,28 @@
+# project root to exec `source bash.source`
+files=(
+    "/www/vanke-gateway/apps/gateway/logs/`date +%Y%m%d`/web.log"
+     "logs/nginx/nginx.vanke.access.log"
+#     "logs/nginx/test"
+     "/www/vanke/apps/web/logs/`date +%Y%m%d`/web.log" 
+     "/logs/php/php.error.log"
+     )
+
+listenLog() {
+    nohup /bin/bash tools/listenLogV1.sh $1 &
+}
+
+listen() {
+    listen_log=''
+    for file in ${files[@]}; do
+        if [ -f ${file} ];then
+            echo '正在监听文件：'${file}
+            listenLog ${file}
+            listen_log=${listen_log}" "${file}
+        else 
+            echo '文件'${file}'不存在,如需监听请重启容器'
+        fi
+    done
+    tail -f ${listen_log}
+}
+
+${EXEC}
