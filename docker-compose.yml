@@ -100,80 +100,6 @@ services:
     networks:
       - default
 
-  # logE:
-  #   image: ubuntu 
-  #   volumes:
-  #     - ${SOURCE_DIR}:/www/:rw
-  #     - ./bash.docker.source:/bash.docker.source
-  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-  #     - ./tools/test.sh:/test.sh
-  #     - ./logs/:/logs/
-  #   environment:
-  #     EXEC: listenLogE
-  #     TZ: "$TZ"
-  #   command:
-  #     - /bin/bash
-  #     - -c
-  #     - |
-  #       source /bash.docker.source 
-  #   networks:
-  #     - default
-
-  # logV:
-  #   image: ubuntu 
-  #   volumes:
-  #     - ${SOURCE_DIR}:/www/:rw
-  #     - ./bash.docker.source:/bash.docker.source
-  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-  #     - ./tools/test.sh:/test.sh
-  #     - ./logs/:/logs/
-  #   environment:
-  #     EXEC: listenLogV
-  #     TZ: "$TZ"
-  #   command:
-  #     - /bin/bash
-  #     - -c
-  #     - |
-  #       source /bash.docker.source 
-  #   networks:
-  #     - default
-
-  # logVG:
-  #   image: ubuntu 
-  #   volumes:
-  #     - ${SOURCE_DIR}:/www/:rw
-  #     - ./bash.docker.source:/bash.docker.source
-  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-  #     - ./tools/test.sh:/test.sh
-  #     - ./logs/:/logs/
-  #   environment:
-  #     EXEC: listenLogVG
-  #     TZ: "$TZ"
-  #   command:
-  #     - /bin/bash
-  #     - -c
-  #     - |
-  #       source /bash.docker.source 
-  #   networks:
-  #     - default
-  # log:
-  #   image: ubuntu 
-  #   volumes:
-  #     - ${SOURCE_DIR}:/www/:rw
-  #     - ./bash.docker1.source:/bash.docker1.source
-  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-  #     - ./tools/test.sh:/test.sh
-  #     - ./logs/:/logs/
-  #   environment:
-  #     EXEC: listen
-  #     TZ: "$TZ"
-  #   command:
-  #     - /bin/bash
-  #     - -c
-  #     - |
-  #       source /bash.docker1.source 
-  #   networks:
-  #     - default
     # php80:
     #   build:
     #     context: ./services/php80
@@ -479,31 +405,31 @@ services:
 #    tty: true
 
 
-#  supervisor:
-#    build:
-#      context: ./services/supervisor
-#      args:
-#        ALPINE_VERSION: alpine:${ALPINE_VERSION}
-#        TZ: "$TZ"
-#        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-#    #container_name: supervisor
-#    ports:
-#      - "${SUPERVISOR_HOST_PORT_C}:9001"
-#    volumes:
-#      - ${SOURCE_DIR}:/www/:rw
-#      - ${SUPERVISOR_LOG}:/var/log/supervisor/:rw
-#      - ${SUPERVISOR_CONFIG}:/etc/supervisor/conf.d/:rw
-#      - ${SUPERVISOR_CONF_FILE}:/etc/supervisor/supervisord.conf:ro
-#    command:
-#      - /bin/sh
-#      - -c
-#      - |
-#        supervisord -n -c /etc/supervisor/supervisord.conf
-#    restart: always
-#    cap_add:
-#      - SYS_PTRACE
-#    networks:
-#      - default
+  supervisor:
+    build:
+      context: ./services/supervisor
+      args:
+        ALPINE_VERSION: alpine:${ALPINE_VERSION}
+        TZ: "$TZ"
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+    #container_name: supervisor
+    ports:
+      - "${SUPERVISOR_HOST_PORT_C}:9001"
+    volumes:
+      - ${SOURCE_DIR}:/www/:rw
+      - ${SUPERVISOR_LOG}:/var/log/supervisor/:rw
+      - ${SUPERVISOR_CONFIG}:/etc/supervisor/conf.d/:rw
+      - ${SUPERVISOR_CONF_FILE}:/etc/supervisor/supervisord.conf:ro
+    command:
+      - /bin/sh
+      - -c
+      - |
+        supervisord -n -c /etc/supervisor/supervisord.conf
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
 
 networks:
   default:
