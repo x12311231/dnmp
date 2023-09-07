@@ -21,34 +21,59 @@ services:
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     environment:
       TZ: "$TZ"
-    restart: always
+    #restart: always
     networks:
       - default
-  php71:
+  # php71:
+  #   build:
+  #     context: ./services/php
+  #     args:
+  #       PHP_VERSION: php:${PHP71_VERSION}-fpm-alpine
+  #       CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+  #       PHP_EXTENSIONS: ${PHP71_EXTENSIONS}
+  #       TZ: "$TZ"
+  #   #container_name: php
+  #   expose:
+  #     - 9501
+  #   extra_hosts:
+  #     - "www.site1.com:172.17.0.1"
+  #   volumes:
+  #     - ${SOURCE_DIR}:/www/:rw
+  #     - ${PHP71_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+  #     - ${PHP71_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+  #     - ${PHP71_LOG_DIR}:/var/log/php
+  #     - ${DATA_DIR}/composer:/tmp/composer
+  #   #restart: always
+  #   cap_add:
+  #     - SYS_PTRACE
+  #   networks:
+  #     - default
+
+  php73:
     build:
       context: ./services/php
       args:
-        PHP_VERSION: php:${PHP71_VERSION}-fpm-alpine
+        PHP_VERSION: php:${PHP73_VERSION}-fpm-alpine
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-        PHP_EXTENSIONS: ${PHP71_EXTENSIONS}
+        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
         TZ: "$TZ"
     #container_name: php
     expose:
       - 9501
-    extra_hosts:
-      - "www.site1.com:172.17.0.1"
+    # extra_hosts:
+    #   - "www.site1.com:172.17.0.1"
     volumes:
       - ${SOURCE_DIR}:/www/:rw
-      - ${PHP71_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-      - ${PHP71_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ${PHP71_LOG_DIR}:/var/log/php
+      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP73_LOG_DIR}:/var/log/php
       - ${DATA_DIR}/composer:/tmp/composer
-    restart: always
+    #restart: always
     cap_add:
       - SYS_PTRACE
     networks:
       - default
-
+      - chuanqi
 
   php:
     build:
@@ -69,108 +94,108 @@ services:
       - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP_LOG_DIR}:/var/log/php
       - ${DATA_DIR}/composer:/tmp/composer
-    restart: always
+    #restart: always
     cap_add:
       - SYS_PTRACE
     networks:
       - default
 
-  logE:
-    image: ubuntu 
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-      - ./bash.docker.source:/bash.docker.source
-      - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-      - ./tools/test.sh:/test.sh
-      - ./logs/:/logs/
-    environment:
-      EXEC: listenLogE
-      TZ: "$TZ"
-    command:
-      - /bin/bash
-      - -c
-      - |
-        source /bash.docker.source 
-    networks:
-      - default
+  # logE:
+  #   image: ubuntu 
+  #   volumes:
+  #     - ${SOURCE_DIR}:/www/:rw
+  #     - ./bash.docker.source:/bash.docker.source
+  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
+  #     - ./tools/test.sh:/test.sh
+  #     - ./logs/:/logs/
+  #   environment:
+  #     EXEC: listenLogE
+  #     TZ: "$TZ"
+  #   command:
+  #     - /bin/bash
+  #     - -c
+  #     - |
+  #       source /bash.docker.source 
+  #   networks:
+  #     - default
 
-  logV:
-    image: ubuntu 
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-      - ./bash.docker.source:/bash.docker.source
-      - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-      - ./tools/test.sh:/test.sh
-      - ./logs/:/logs/
-    environment:
-      EXEC: listenLogV
-      TZ: "$TZ"
-    command:
-      - /bin/bash
-      - -c
-      - |
-        source /bash.docker.source 
-    networks:
-      - default
+  # logV:
+  #   image: ubuntu 
+  #   volumes:
+  #     - ${SOURCE_DIR}:/www/:rw
+  #     - ./bash.docker.source:/bash.docker.source
+  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
+  #     - ./tools/test.sh:/test.sh
+  #     - ./logs/:/logs/
+  #   environment:
+  #     EXEC: listenLogV
+  #     TZ: "$TZ"
+  #   command:
+  #     - /bin/bash
+  #     - -c
+  #     - |
+  #       source /bash.docker.source 
+  #   networks:
+  #     - default
 
-  logVG:
-    image: ubuntu 
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-      - ./bash.docker.source:/bash.docker.source
-      - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-      - ./tools/test.sh:/test.sh
-      - ./logs/:/logs/
-    environment:
-      EXEC: listenLogVG
-      TZ: "$TZ"
-    command:
-      - /bin/bash
-      - -c
-      - |
-        source /bash.docker.source 
-    networks:
-      - default
-  log:
-    image: ubuntu 
-    volumes:
-      - ${SOURCE_DIR}:/www/:rw
-      - ./bash.docker1.source:/bash.docker1.source
-      - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
-      - ./tools/test.sh:/test.sh
-      - ./logs/:/logs/
-    environment:
-      EXEC: listen
-      TZ: "$TZ"
-    command:
-      - /bin/bash
-      - -c
-      - |
-        source /bash.docker1.source 
-    networks:
-      - default
-  #  php80:
-  #    build:
-  #      context: ./services/php80
-  #      args:
-  #        PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine3.13
-  #        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-  #        PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
-  #        TZ: "$TZ"
-  #    #container_name: php80
-  #    expose:
-  #      - 9501
-  #    volumes:
-  #      - ${SOURCE_DIR}:/www/:rw
-  #      - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
-  #      - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
-  #      - ${PHP80_LOG_DIR}:/var/log/php
-  #      - ${DATA_DIR}/composer:/tmp/composer
-  #    restart: always
-  #    cap_add:
-  #      - SYS_PTRACE
-  #    networks:
-  #      - default
+  # logVG:
+  #   image: ubuntu 
+  #   volumes:
+  #     - ${SOURCE_DIR}:/www/:rw
+  #     - ./bash.docker.source:/bash.docker.source
+  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
+  #     - ./tools/test.sh:/test.sh
+  #     - ./logs/:/logs/
+  #   environment:
+  #     EXEC: listenLogVG
+  #     TZ: "$TZ"
+  #   command:
+  #     - /bin/bash
+  #     - -c
+  #     - |
+  #       source /bash.docker.source 
+  #   networks:
+  #     - default
+  # log:
+  #   image: ubuntu 
+  #   volumes:
+  #     - ${SOURCE_DIR}:/www/:rw
+  #     - ./bash.docker1.source:/bash.docker1.source
+  #     - ./tools/listenLogV1.sh:/tools/listenLogV1.sh
+  #     - ./tools/test.sh:/test.sh
+  #     - ./logs/:/logs/
+  #   environment:
+  #     EXEC: listen
+  #     TZ: "$TZ"
+  #   command:
+  #     - /bin/bash
+  #     - -c
+  #     - |
+  #       source /bash.docker1.source 
+  #   networks:
+  #     - default
+    # php80:
+    #   build:
+    #     context: ./services/php80
+    #     args:
+    #       PHP_VERSION: php:${PHP80_VERSION}-fpm-alpine3.13
+    #       CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+    #       PHP_EXTENSIONS: ${PHP80_EXTENSIONS}
+    #       TZ: "$TZ"
+    #   #container_name: php80
+    #   expose:
+    #     - 9501
+    #   volumes:
+    #     - ${SOURCE_DIR}:/www/:rw
+    #     - ${PHP80_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+    #     - ${PHP80_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+    #     - ${PHP80_LOG_DIR}:/var/log/php
+    #     - ${DATA_DIR}/composer:/tmp/composer
+    #   # restart: always
+    #   cap_add:
+    #     - SYS_PTRACE
+    #   networks:
+    #     - default
 
   #  php56:
   #    build:
@@ -231,20 +256,20 @@ services:
         #      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
         #      TZ: "$TZ"
 
-#  mysql5:
-#    image: mysql:${MYSQL5_VERSION}
-#    #container_name: mysql5
-#    ports:
-#      - "${MYSQL5_HOST_PORT}:3306"
-#    volumes:
-#      - ${MYSQL5_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
-#      - ${DATA_DIR}/mysql5:/var/lib/mysql/:rw
-#    restart: always
-#    networks:
-#      - default
-#    environment:
-#      MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
-#      TZ: "$TZ"
+  mysql5:
+    image: mysql:${MYSQL5_VERSION}
+    #container_name: mysql5
+    ports:
+      - "${MYSQL5_HOST_PORT}:3306"
+    volumes:
+      - ${MYSQL5_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
+      - ${DATA_DIR}/mysql5:/var/lib/mysql/:rw
+    # restart: always
+    networks:
+      - default
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
+      TZ: "$TZ"
 
 #  openresty:
 #    image:  openresty/openresty:${OPENRESTY_VERSION}
@@ -265,21 +290,50 @@ services:
 #    networks:
 #      - default
 
-#  redis:
-#    image: redis:${REDIS_VERSION}
-#    #container_name: redis
-#    ports:
-#      - "${REDIS_HOST_PORT}:6379"
-#    volumes:
-#      - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
-#      - ${DATA_DIR}/redis:/data/:rw
-#    restart: always
-#    entrypoint: ["redis-server", "/etc/redis.conf"]
-#    environment:
-#      TZ: "$TZ"
-#    networks:
-#      - default
+  redis:
+    image: redis:${REDIS_VERSION}
+    #container_name: redis
+    ports:
+      - "${REDIS_HOST_PORT}:6379"
+    volumes:
+      - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
+      - ${DATA_DIR}/redis:/data/:rw
+    # restart: always
+    entrypoint: ["redis-server", "/etc/redis.conf"]
+    environment:
+      TZ: "$TZ"
+    networks:
+      - default
 
+  # redis80:
+  #   image: redis:${REDIS_VERSION}
+  #   #container_name: redis
+  #   ports:
+  #     - "6380:6379"
+  #   volumes:
+  #     - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
+  #   #   - ${DATA_DIR}/redis:/data/:rw
+  #   #restart: always
+  #   entrypoint: ["redis-server", "/etc/redis.conf"]
+  #   environment:
+  #     TZ: "$TZ"
+  #   networks:
+  #     - default
+
+  # redis81:
+  #   image: redis:${REDIS_VERSION}
+  #   #container_name: redis
+  #   ports:
+  #     - "6381:6379"
+  #   volumes:
+  #     - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
+  #   #   - ${DATA_DIR}/redis:/data/:rw
+  #   #restart: always
+  #   entrypoint: ["redis-server", "/etc/redis.conf"]
+  #   environment:
+  #     TZ: "$TZ"
+  #   networks:
+  #     - default
 #  memcached:
 #    image: memcached:${MEMCACHED_VERSION}
 #    #container_name: memcached
@@ -453,3 +507,7 @@ services:
 
 networks:
   default:
+
+  chuanqi:
+    driver: bridge
+    external: true
