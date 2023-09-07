@@ -433,7 +433,3 @@ services:
 
 networks:
   default:
-
-  chuanqi:
-    driver: bridge
-    external: true
